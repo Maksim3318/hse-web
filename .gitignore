@@ -1,2 +1,4 @@
 *.sqlite3
 venv/
+forlab/media/3dmodels/*
+forlab/media/notes/*
