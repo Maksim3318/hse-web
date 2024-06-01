@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Инструкция</title>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" type="text/css">
+    <header class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3" id="mainNav">
+        <div class="container"> 
+            <a class="navbar-brand js-scroll-trigger" href="/"><img class="logo" src="{% static 'img/logo.png' %}" alt="3D MIEM">3D MIEM</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto" id="menu">
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/" style="font-weight:bold;">Главная</a> </li>
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/appform">Подать заявку</a> </li>
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/findart">Статус заказа</a> </li>
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/manual">Инструкция</a> </li>
+			  {% if user.is_anonymous %}
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/accounts/login">Войти</a> </li>
+			  {% else %}
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/outart">Все заказы</a> </li>
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/accounts/logout">Выйти</a> </li>
+			  {% endif %}
+                </ul>
+            </div>
+        </div>
+    </header>
+    <section class="space-md">
+        <div class="container ">
+            <div class="row" style="margin-bottom: 60px;">
+                <div class="col-lg-12 text-center frame">
+                    <h1 class="maintitle">Инструкция по<br>подготовке 3d-модели</h1>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-lg-5">
+                    
+                    <div style="margin-bottom: -7em;"></div>
+                    <div class="sticky">
+                        <div><h2>ОБЩИЕ ТРЕБОВАНИЯ К 3D-ПЕЧАТАЕМЫМ ОБЪЕКТАМ</h2></div>
+                    </div>
+                    <div style="margin-top: 7em;"></div>
+                </div>
+
+                <div class="col-lg-7">
+                    <div class="step">
+                        <div class="row">
+                            <hr NoShade class="line">
+                        </div>
+                        <div class="row">
+                            <h3>Замкнутость поверхности</h3>
+                        </div>  
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-10">
+                                <p>Одним из самых важных требований является целостность поверхности модели. Другими словами, каждая вершина должна быть соединена ребрами и являться частью полигона, не должно быть свободных ребер или вершин, не относящихся к поверхности. При этом какие-либо полигоны не должны отсутствовать, разрывая общую поверхность.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="row">
+                            <hr NoShade class="line">
+                        </div>
+                        <div class="row">
+                            <h3>Минимальная толщина</h3>
+                        </div>  
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-10">
+                                <p>Любая поверхность должна иметь минимальную толщину в зависимости от материала, из которого она будет печататься. Для печати в лаборатории толщина стенок объекта должна составлять не менее 1мм.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="row">
+                            <hr NoShade class="line">
+                        </div>
+                        <div class="row">
+                            <h3>Пересечение поверхностей</h3>
+                        </div>  
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-10">
+                                <p>Модель должна иметь непрерывную внешнюю оболочку, иначе внутри объекта создается поверхность с бесконечно малой толщиной стенки, которая не сможет быть напечатана.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="step">
+                        <div class="row">
+                            <hr NoShade class="line">
+                        </div>
+                        <div class="row">
+                            <h3>Ориентация поверхностей</h3>
+                        </div>  
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-10">
+                                <p>Большая часть программ для моделирования определяет направление поверхностей (обычно оно задается направлением, ориентацией нормалей). Для того, чтобы корректно определить объем модели, все поверхности должны быть ориентированы наружу.
+                                <br><br>
+                                Наложения поверхностей или полигонов в модели тоже необходимо избегать, программа обработки будет считать это ошибкой и не определит правильный объем.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="step">
+                        <div class="row">
+                            <hr NoShade class="line">
+                        </div>
+                        <div class="row">
+                            <h3>Распределенная нагрузка</h3>
+                        </div>  
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-10">
+                                <p>Обратите внимание на пропорции и распределение нагрузки в вашей модели. Если вы хотите добиться устойчивости, то стоит проверить площадь опорной точки и конструкцию подставки. Иногда необходимо добавить дополнительные элементы для стабильности.
+                                    <br><br>
+                                    Еще один важный момент — это части модели, которые находятся под постоянной нагрузкой. Допустимая нагрузка зависит от используемого материала, но мы всетаки советуем избегать таких конструкций или предусматривать дополнительное упрочнение. Иначе модель может быть повреждена при извлечении из принтера, обработке и дальнейшем использовании.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <hr NoShade class="line">
+                    </div>
+                    
+                        
+                </div>
+            </div>
+
+            <div class="container">
+                
+
+                <div class="row">
+                    <div class="col-lg-6" style="padding: 0px 30px 0px 0px;">
+                        <table>
+                            <caption class="h5 table-title">КАКИМ ДОЛЖЕН БЫТЬ ФАЙЛ С МОДЕЛЬЮ</caption>
+                            <tbody>
+                                <tr>
+                                    <td>Формат файла</td>
+                                    <td>.STL</td>
+                                </tr>
+                                <tr>
+                                    <td>Программы для экспорта в STL</td>
+                                    <td>Autodesk 3ds Max; Blender; Solid Works; NX6; Компас 3D; Fusion</td>
+                                </tr>
+                                <tr>
+                                    <td>Размеры файла</td>
+                                    <td>Файл не должен превышать 100Мб. Чем меньше размер и проще модель, тем лучше.</td>
+                                </tr>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-lg-6" style="padding: 0px 0px 0px 0px;">
+                        <table>
+                            <caption class="h5 table-title">ОСОБЕННОСТИ МОДЕЛИРОВАНИЯ ДЛЯ ПЕЧАТИ</caption>
+                            <tbody>
+                                
+                                <tr>
+                                    <td>Размеры модели</td>
+                                    <td>Максимально возможная область печати составляет круг диаметром 400 мм. Рекомендуемые размеры моделей - 197 х 215 х 305 мм. </td>
+                                </tr>
+                                <tr>
+                                    <td>Минимальная толщина объектов</td>
+                                    <td>Минимальные размеры и толщина объектов - не менее 1,2 мм.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+            
+        </div>
+    </section>
+
+    </body>

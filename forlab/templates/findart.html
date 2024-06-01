@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Статус заказа</title>
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+</head>
+<body>
+    <link rel="stylesheet" href="{% static 'css/style.css'%}" type="text/css">
+    <header class="navbar navbar-expand-lg navbar-light bg-white fixed-top py-3" id="mainNav">
+        <div class="container"> 
+            <a class="navbar-brand js-scroll-trigger" href="/"><img class="logo" src="{% static 'img/logo.png' %}" alt="3D MIEM">3D MIEM</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto" id="menu">
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/" style="font-weight:bold;">Главная</a> </li>
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/appform">Подать заявку</a> </li>
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/findart">Статус заказа</a> </li>
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/manual">Инструкция</a> </li>
+			  {% if user.is_anonymous %}
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/accounts/login">Войти</a> </li>
+			  {% else %}
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/outart">Все заказы</a> </li>
+                    <li class="nav-item"> <a class="nav-link js-scroll-trigger" href="/accounts/logout">Выйти</a> </li>
+			  {% endif %}
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section class="space-md">
+        <div class="container ">
+            <div class="row" style="margin-bottom: 60px;">
+                <div class="col-lg-2 col-sm-0"></div>
+                <div class="col-lg-8 col-sm-12 text-center frame">
+                    <h1 class="maintitle">Узнать статус заказа</h1>
+                </div>
+                <div class="col-lg-2 col-sm-0"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="row sub_input">
+                        <div class="col-lg-6 text-right">
+                            Номер заявки
+                        </div>
+                        <form class="col-lg-6" method="get">
+                            <input name="num" type="text">
+                    </div>
+
+                    <div class="row sub-form">
+                        <div class="col-lg-4"></div>
+                        <input class="col-lg-4" type="submit" value="Найти">
+                        <div class="col-lg-4"></div>
+                    </div>
+				</form>
+			  {% if art %}
+				{% for el in art%}
+                    <div class="row sub_input" style="margin-top: 30px;">
+                        <div class="col-lg-6 text-right font-weight-bold" style="padding: 3px;">
+                            {{el.number}} 
+                        </div>
+                        <div class="col-lg-6 font-weight-bold" style="padding: 3px;">
+                            {{el.status}}
+                        </div>
+                    </div>
+			  	{% endfor %}
+                    {% else %}
+                    <div class="row sub_input" style="margin-top: 30px;">
+                        <div class="col-lg-6 text-right font-weight-bold" style="padding: 3px;">
+                            {{error}} 
+                        </div>
+                        <div class="col-lg-6 font-weight-bold" style="padding: 3px;">
+                        </div>
+                    </div>
+			  {% endif %}
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+
+        </div>
+    </section>
+</body>
