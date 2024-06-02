@@ -1,5 +1,6 @@
 *.sqlite3
 venv/
+.venv/
 forlab/media/3dmodels/*
 forlab/media/notes/*
 __pycache__/
