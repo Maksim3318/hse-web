@@ -1,0 +1,20 @@
+services:
+  nginx:
+    image: nginx:1.27
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - static-files:/var/www/hse-web/static
+  backend:
+    build:
+      context: .
+    ports:
+      - 8000:8000
+    volumes:
+      - static-files:/var/www/hse-web/static
+      - db-data:/app/forlab/db-data
+
+volumes:
+  static-files:
+  db-data:
