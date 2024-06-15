@@ -16,20 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.auth import views
 from django.urls import path
-from apps.home import views as v1
-from apps.appform import views as v2
+from apps.appform import views as v
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', v1.index, name='home'),
-    path('appform/', v2.create, name='appform'),
-    path('outart/', v2.outart, name='outart'),
-    path('findart/', v2.findart, name='findart'),
-    path('outart/edit/<str:number>/', v2.edit, name='edit'),
+    path('appform/', v.Create.as_view(), name='appform'),
+    path('outart/', v.Outart.as_view(), name='outart'),
+    path('findart/', v.Findart.as_view(), name='findart'),
     path('accounts/login/', views.LoginView.as_view(), name='login'),
     path('accounts/logout/', views.LogoutView.as_view(), name='logout'),
-    path('manual/', v2.manual, name='manual'),
 ]
 

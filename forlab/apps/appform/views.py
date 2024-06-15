@@ -1,70 +1,50 @@
-from django.shortcuts import render, redirect
 from .models import Articles
-from .forms import ArticlesForm
-from django.db.models import Q
-from django.forms import formset_factory
-from django.contrib.auth.decorators import login_required
+from rest_framework.views import APIView 
+from rest_framework.response import Response
+from rest_framework import status
+from .serializers import ArticleSerializer
 import requests
 import os
 
-def create(request):
-	error = ''
-	if request.method == 'POST':
-		form = ArticlesForm(request.POST, request.FILES)
-		if form.is_valid():
-			obj = form.save()
-			return redirect('home')
+class Create(APIView):
+	def post(self, request, *args, **kwargs):
+		data = request.data
+		serializer = ArticleSerializer(data=data)
+		if serializer.is_valid():
+			obj = serializer.save()
+			return Response(serializer.data, status=status.HTTP_200_OK)
 		else:
-			error = 'Форма заполнена неверно'
-		
-	form = ArticlesForm()
-	
-	data = {
-		'form': form,
-		'error': error
-	}
-	return render(request, "appform.html", data)
+			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-@login_required
-def outart(request):
-	art = Articles.objects.all()
-	return render(request, 'outart.html', {'art':art})
+class Outart(APIView):
+	def get(self, request, *args, **kwargs):
+		data = Articles.objects.all()
+		serializer = ArticleSerializer(data, many=True)
+		return Response(serializer.data, status=status.HTTP_200_OK)
 
-def findart(request):
-	error = ''
-	if request.method == 'GET':
-		q = request.GET.get('num')
-		art = Articles.objects.filter(number=q)
-		if art:
-			return render(request, 'findart.html', {'art':art})
-		else: 
-			if q:
-				error = 'Такой заявки нет'
-			return render(request, 'findart.html', {'error':error})
-			
-def edit(request, number):
-	try:
-		article = Articles.objects.get(number=number)
-		form = ArticlesForm(instance = article)
+	def put(self, request, *args, **kwargs):
+		instance = Articles.objects.get(number=request.data.get('number'))
+		if not instance:
+			return Response({"message": "Заявка не найдена"}, status=status.HTTP_400_BAD_REQUEST)
 		data = {
-			'form':form,
-			'article':article
+			'status': request.data.get('status')
 		}
-		if request.method == "POST":
-			form = ArticlesForm(request.POST, instance = article)
-			if form.is_valid():
-				form.save()
-				return redirect('outart')
+		serializer = ArticleSerializer(instance=instance, data=data, partial=True)
+		if serializer.is_valid():
+			serializer.save()
+			return Response(serializer.data, status=status.HTTP_200_OK)
+		return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class Findart(APIView):
+	def get(self, request, *args, **kwargs):
+		num = request.query_params.get('number')
+		data = Articles.objects.filter(number=num)
+		if len(data) == 1:
+			serializer = ArticleSerializer(data[0])
+			return Response(serializer.data, status=status.HTTP_200_OK)
+		elif len(data) == 0:
+			return Response({'message': f'Заявка {num} не найдена'}, status=status.HTTP_400_BAD_REQUEST)
 		else:
-			return render(request, "edit.html", data)
-	except Articles.DoesNotExist:
-		return redirect('home')		
+			return Response({'message': f'Заявка {num} не может быть обработана, обратитесь в поддержку'}, status=status.HTTP_409_CONFLICT)
 
-def manual(request):
-	return render(request, 'manual.html')
-
-def logout(reques):
-	if request.method == "GET":
-		django.contrib.auth.logout()
-		return redirect('home')
 		
