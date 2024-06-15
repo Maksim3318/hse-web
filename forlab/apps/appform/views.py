@@ -12,9 +12,9 @@ class Create(APIView):
 		serializer = ArticleSerializer(data=data)
 		if serializer.is_valid():
 			obj = serializer.save()
-			return Response({'message': 'Заявка принята'}, serializer.data, status=status.HTTP_200_OK)
+			return Response(serializer.data, status=status.HTTP_200_OK)
 		else:
-			return Response({'message': 'Введены некорректные данные'}, serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+			return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class Outart(APIView):
 	def get(self, request, *args, **kwargs):
