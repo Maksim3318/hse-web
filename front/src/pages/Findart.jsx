@@ -6,7 +6,7 @@ const Findart = () => {
   const [formData, setFormData] = useState({
     num: '',
   });
-  const [art, setArt] = useState([]);
+  const [art, setArt] = useState({});
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
@@ -21,13 +21,13 @@ const Findart = () => {
     e.preventDefault();
     try {
       // Здесь вы можете отправить запрос на сервер и получить данные
-      const response = await fetch(`/your-endpoint?num=${formData.num}`);
+      const response = await fetch(`http://localhost:8000/findart?number=${formData.num}`);
       const data = await response.json();
-      if (data.error) {
-        setError(data.error);
-        setArt([]);
+      if (response.status !== 200) {
+        setArt({});
+        setError(data.message);
       } else {
-        setArt(data.art);
+        setArt(data);
         setError('');
       }
     } catch (error) {
@@ -39,7 +39,7 @@ const Findart = () => {
     <div>
       <section className="space-md">
         <div className="container ">
-            <div className="row" style={{"margin-bottom": "60px"}}>
+            <div className="row" style={{ marginBottom: '60px' }}>
                 <div className="col-lg-2 col-sm-0"></div>
                 <div className="col-lg-8 col-sm-12 text-center frame">
                     <h1 className="maintitle">Узнать статус заказа</h1>
@@ -56,31 +56,19 @@ const Findart = () => {
                     <input name="num" type="text" value={formData.num} onChange={handleChange} />
                   </div>
                 </div>
-                <div class="row sub-form">
-                  <div class="col-lg-4"></div>
-                  <input class="col-lg-4" type="submit" value="Найти"/>
-                  <div class="col-lg-4"></div>
+                <div className="row sub-form">
+                  <div className="col-lg-4"></div>
+                  <input className="col-lg-4" type="submit" value="Найти"/>
+                  <div className="col-lg-4"></div>
                 </div>
-                {art.length > 0 &&
-                  art.map((el, index) => (
-                    <div key={index} className="row sub_input" style={{ marginTop: '30px' }}>
+                    <div className="row sub_input" style={{ marginTop: '30px' }}>
                       <div className="col-lg-6 text-right font-weight-bold" style={{ padding: '3px' }}>
-                        {el.number}
+                        {art.number}
                       </div>
                       <div className="col-lg-6 font-weight-bold" style={{ padding: '3px' }}>
-                        {el.status}
+                        {art.status ? art.status : error}
                       </div>
                     </div>
-                  ))}
-
-                {art.length === 0 && error && (
-                  <div className="row sub_input" style={{ marginTop: '30px' }}>
-                    <div className="col-lg-6 text-right font-weight-bold" style={{ padding: '3px' }}>
-                      {error}
-                    </div>
-                    <div className="col-lg-6 font-weight-bold" style={{ padding: '3px' }}></div>
-                  </div>
-                )}
                 </div>
               <div className="col-lg-3"></div>
           </form>

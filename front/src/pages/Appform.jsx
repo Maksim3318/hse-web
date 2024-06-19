@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const COURSES = [
@@ -24,7 +24,7 @@ const GROUPS = [
 
 const Appform = () => {
   const [formData, setFormData] = useState({
-    number: '',
+    //number: nextNumber,
     mail: '',
     name: '',
     op: '',
@@ -36,34 +36,27 @@ const Appform = () => {
     note: null,
     comment: '',
   });
+  const [message, setMessage] = useState("");
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
+    setFormData({
+      ...formData,
       [name]: files ? files[0] : value,
-    }));
+    });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    Object.keys(formData).forEach((key) => {
-      if (key === 'dmodel' || key === 'note') {
-        formData.append(key, formData[key] || '');
-      } else {
-        formData.append(key, formData[key]);
-      }
-    });
     try {
-      await axios.post('http://127.0.0.1:8000/appform/', formData, {
+      const res = await axios.post('http://127.0.0.1:8000/appform/', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
       // Сброс формы после успешной отправки
       setFormData({
-        number: '',
+        //number: formData.number + 1,
         mail: '',
         name: '',
         op: '',
@@ -75,6 +68,8 @@ const Appform = () => {
         note: null,
         comment: '',
       });
+
+      setMessage(`Заявка ${res.data.number} отправлена!`);
     } catch (error) {
       console.error('Ошибка при отправке формы:', error);
     }
@@ -82,24 +77,29 @@ const Appform = () => {
 
   return (
     <div>
-      <section class="space-md">
-          <div class="container ">
-              <div class="row" style={{"margin-bottom": "60px"}}>
-                  <div class="col-lg-2 col-sm-0"></div>
-                  <div class="col-lg-8 col-sm-12 text-center frame">
-                      <h1 class="maintitle">Подать заявку на<br/>3D-печать</h1>
+      <section className="space-md">
+          <div className="container">
+              <div className="row" style={{ marginBottom: '60px' }}>
+                  <div className="col-lg-2 col-sm-0"></div>
+                  <div className="col-lg-8 col-sm-12 text-center frame">
+                      <h1 className="maintitle">Подать заявку на<br/>3D-печать</h1>
                   </div>
-                  <div class="col-lg-2 col-sm-0"></div>
+                  <div className="col-lg-2 col-sm-0"></div>
+              </div>
+              <div className="text-center" style={{ fontSize: 20, marginBottom: '60px' }}>
+                {message}
               </div>
               <form className="row" onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="col-lg-3"></div>
                 <div className="col-lg-6">
+{/*
                   <div className="row sub_input">
                     <div className="col-lg-6 text-right">Номер заявки</div>
                     <div className="col-lg-6">
-                      <input type="text" name="number" value={formData.number} onChange={handleChange} />
+                      <input type="text" name="number" readOnly value={formData.number} />
                     </div>
                   </div>
+*/}
                   <div className="row sub_input">
                     <div className="col-lg-6 text-right">Электронная почта</div>
                     <div className="col-lg-6">
@@ -179,7 +179,7 @@ const Appform = () => {
                       <input className="col-lg-4" type="submit" value="Отправить"/>
                       <div className="col-lg-4"></div>
                   </div>
-                      
+
                   </div>
                   <div className="col-lg-3"></div>
               </form>
