@@ -21,6 +21,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
+    path('', v.index, name='home'),
     path('admin/', admin.site.urls),
     path('appform/', v.Create.as_view(), name='appform'),
     path('outart/', v.Outart.as_view(), name='outart'),

@@ -5,6 +5,10 @@ from rest_framework import status
 from .serializers import ArticleSerializer
 import requests
 import os
+from django.shortcuts import render
+
+def index(request):
+	return render(request, "index.html")
 
 class Create(APIView):
 	def post(self, request, *args, **kwargs):

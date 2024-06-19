@@ -2,9 +2,9 @@ import { React, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-const loginUrl = '/accounts/login/';
+const loginUrl = 'http://localhost:8000/accounts/login/';
 
-export default function Login() {
+export default function Login({ onLogin }) {
   const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
@@ -17,7 +17,7 @@ export default function Login() {
     console.log(username);
     console.log(password);
 
-    const response = await fetch("/accounts/login/", {credentials: "include"});
+    const response = await fetch("http://localhost:8000/accounts/login/", {credentials: "include"});
     const text = await response.text();
     const csrf_token = text.match('csrfmiddlewaretoken.*value="(.*)"')[1];
 
@@ -28,11 +28,12 @@ export default function Login() {
     loginFormData.append("username", username);
     loginFormData.append("password", password);
 
-    axios.post(loginUrl, loginFormData, {
+    axios.post('http://localhost:8000/accounts/login/', loginFormData, {
       withCredentials: true,
     })
       .then(_ => {
         localStorage.setItem('username', username);
+        onLogin();
         navigate("/");
       })
       .catch((error) => {
