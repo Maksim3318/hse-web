@@ -22,6 +22,18 @@ const GROUPS = [
   ['Другое', 'Другое'],
 ];
 
+const SuccessMessage = ({message}) => {
+  if (message) {
+    return (
+      <div className="text-center alert alert-success" style={{ fontSize: 20, marginBottom: '60px' }}>
+        {message}
+      </div>
+    );
+  }
+
+  return null;
+}
+
 const Appform = () => {
   const [formData, setFormData] = useState({
     //number: nextNumber,
@@ -86,9 +98,7 @@ const Appform = () => {
                   </div>
                   <div className="col-lg-2 col-sm-0"></div>
               </div>
-              <div className="text-center" style={{ fontSize: 20, marginBottom: '60px' }}>
-                {message}
-              </div>
+              <SuccessMessage message={message}/>
               <form className="row" onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="col-lg-3"></div>
                 <div className="col-lg-6">
