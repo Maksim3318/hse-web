@@ -5,7 +5,7 @@ function Manual() {
     <div>
       <section className="space-md">
         <div className="container ">
-            <div className="row" style={{"margin-bottom": "60px"}}>
+            <div className="row" style={{marginBottom: "60px"}}>
                 <div className="col-lg-12 text-center frame">
                     <h1 className="maintitle">Инструкция по<br/>подготовке 3d-модели</h1>
                 </div>
@@ -13,12 +13,12 @@ function Manual() {
 
             <div className="row mb-4">
                 <div className="col-lg-5">
-                    
-                    <div style={{"margin-bottom": "-7em"}}></div>
+
+                    <div style={{marginBottom: "-7em"}}></div>
                     <div className="sticky">
                         <div><h2>ОБЩИЕ ТРЕБОВАНИЯ К 3D-ПЕЧАТАЕМЫМ ОБЪЕКТАМ</h2></div>
                     </div>
-                    <div style={{"margin-top": "7em"}}></div>
+                    <div style={{marginTop: "7em"}}></div>
                 </div>
 
                 <div className="col-lg-7">
