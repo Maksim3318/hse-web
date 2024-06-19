@@ -28,7 +28,7 @@ function Manual() {
                         </div>
                         <div className="row">
                             <h3>Замкнутость поверхности</h3>
-                        </div>  
+                        </div>
                         <div className="row">
                             <div className="col-lg-2"></div>
                             <div className="col-lg-10">
@@ -43,7 +43,7 @@ function Manual() {
                         </div>
                         <div className="row">
                             <h3>Минимальная толщина</h3>
-                        </div>  
+                        </div>
                         <div className="row">
                             <div className="col-lg-2"></div>
                             <div className="col-lg-10">
@@ -58,7 +58,7 @@ function Manual() {
                         </div>
                         <div className="row">
                             <h3>Пересечение поверхностей</h3>
-                        </div>  
+                        </div>
                         <div className="row">
                             <div className="col-lg-2"></div>
                             <div className="col-lg-10">
@@ -66,14 +66,14 @@ function Manual() {
                             </div>
                         </div>
                     </div>
-                    
+
                     <div className="step">
                         <div className="row">
                             <hr NoShade className="line"></hr>
                         </div>
                         <div className="row">
                             <h3>Ориентация поверхностей</h3>
-                        </div>  
+                        </div>
                         <div className="row">
                             <div className="col-lg-2"></div>
                             <div className="col-lg-10">
@@ -90,7 +90,7 @@ function Manual() {
                         </div>
                         <div className="row">
                             <h3>Распределенная нагрузка</h3>
-                        </div>  
+                        </div>
                         <div className="row">
                             <div className="col-lg-2"></div>
                             <div className="col-lg-10">
@@ -102,7 +102,7 @@ function Manual() {
                     </div>
                     <div className="row">
                         <hr NoShade className="line"></hr>
-                    </div>     
+                    </div>
                 </div>
             </div>
 
@@ -124,7 +124,7 @@ function Manual() {
                                     <td>Размеры файла</td>
                                     <td>Файл не должен превышать 100Мб. Чем меньше размер и проще модель, тем лучше.</td>
                                 </tr>
-                                
+
                             </tbody>
                         </table>
                     </div>
@@ -133,7 +133,7 @@ function Manual() {
                         <table>
                             <caption className="h5 table-title">ОСОБЕННОСТИ МОДЕЛИРОВАНИЯ ДЛЯ ПЕЧАТИ</caption>
                             <tbody>
-                                
+
                                 <tr>
                                     <td>Размеры модели</td>
                                     <td>Максимально возможная область печати составляет круг диаметром 400 мм. Рекомендуемые размеры моделей - 197 х 215 х 305 мм. </td>
@@ -145,10 +145,10 @@ function Manual() {
                             </tbody>
                         </table>
                     </div>
-                    
+
                 </div>
-                
-            </div>  
+
+            </div>
         </div>
       </section>
     </div>
