@@ -24,7 +24,7 @@ function Manual() {
                 <div className="col-lg-7">
                     <div className="step">
                         <div className="row">
-                            <hr NoShade className="line"></hr>
+                            <hr noshade="true" className="line"></hr>
                         </div>
                         <div className="row">
                             <h3>Замкнутость поверхности</h3>
@@ -39,7 +39,7 @@ function Manual() {
 
                     <div className="step">
                         <div className="row">
-                            <hr NoShade className="line"></hr>
+                            <hr noshade="true" className="line"></hr>
                         </div>
                         <div className="row">
                             <h3>Минимальная толщина</h3>
@@ -54,7 +54,7 @@ function Manual() {
 
                     <div className="step">
                         <div className="row">
-                            <hr NoShade className="line"></hr>
+                            <hr noshade="true" className="line"></hr>
                         </div>
                         <div className="row">
                             <h3>Пересечение поверхностей</h3>
@@ -69,7 +69,7 @@ function Manual() {
 
                     <div className="step">
                         <div className="row">
-                            <hr NoShade className="line"></hr>
+                            <hr noshade="true" className="line"></hr>
                         </div>
                         <div className="row">
                             <h3>Ориентация поверхностей</h3>
@@ -86,7 +86,7 @@ function Manual() {
 
                     <div className="step">
                         <div className="row">
-                            <hr NoShade className="line"></hr>
+                            <hr noshade="true" className="line"></hr>
                         </div>
                         <div className="row">
                             <h3>Распределенная нагрузка</h3>
@@ -101,7 +101,7 @@ function Manual() {
                         </div>
                     </div>
                     <div className="row">
-                        <hr NoShade className="line"></hr>
+                        <hr noshade="true" className="line"></hr>
                     </div>
                 </div>
             </div>
