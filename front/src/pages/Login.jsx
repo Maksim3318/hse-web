@@ -1,6 +1,6 @@
 import { React, useState } from 'react';
 import axios from 'axios';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const loginUrl = 'http://localhost:8000/accounts/login/';
 
@@ -9,19 +9,20 @@ export default function Login({ onLogin }) {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async event => {
     event.preventDefault();
 
-    console.log(username);
-    console.log(password);
-
-    const response = await fetch("http://localhost:8000/accounts/login/", {credentials: "include"});
+    // Sets the Cookie: csrftoken=... and returns masked csrftoken
+    // in the response body
+    const response = await fetch(
+      "http://localhost:8000/accounts/login/",
+      {
+        credentials: "include"
+      }
+    );
     const text = await response.text();
     const csrf_token = text.match('csrfmiddlewaretoken.*value="(.*)"')[1];
-
-    console.log(csrf_token);
 
     let loginFormData = new FormData();
     loginFormData.append("csrfmiddlewaretoken", csrf_token);
@@ -37,8 +38,7 @@ export default function Login({ onLogin }) {
         navigate("/");
       })
       .catch((error) => {
-        console.log(error);
-        setErrorMessage("Такого пользователя не существует!");
+        console.error(error);
       })
   }
 

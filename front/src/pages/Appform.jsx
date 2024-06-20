@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 const COURSES = [
@@ -36,7 +36,6 @@ const SuccessMessage = ({message}) => {
 
 const Appform = () => {
   const [formData, setFormData] = useState({
-    //number: nextNumber,
     mail: '',
     name: '',
     op: '',
@@ -68,7 +67,6 @@ const Appform = () => {
       });
       // Сброс формы после успешной отправки
       setFormData({
-        //number: formData.number + 1,
         mail: '',
         name: '',
         op: '',
@@ -102,14 +100,6 @@ const Appform = () => {
               <form className="row" onSubmit={handleSubmit} encType="multipart/form-data">
                 <div className="col-lg-3"></div>
                 <div className="col-lg-6">
-{/*
-                  <div className="row sub_input">
-                    <div className="col-lg-6 text-right">Номер заявки</div>
-                    <div className="col-lg-6">
-                      <input type="text" name="number" readOnly value={formData.number} />
-                    </div>
-                  </div>
-*/}
                   <div className="row sub_input">
                     <div className="col-lg-6 text-right">Электронная почта</div>
                     <div className="col-lg-6">
