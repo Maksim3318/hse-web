@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import './ArtList.css'
 
 const statusOptions = [
   "На рассмотрении",
@@ -75,10 +76,10 @@ const Outart = () => {
 
   return (
     <div className="container mt-5">
-      <h1 className="mb-4" style={{marginTop: "60px"}}>Список заявок</h1>
+      <h1 className="mb-4" style={{marginTop: "95px"}}>Список заявок</h1>
       <div className="row">
         {arts.map((art) => (
-          <div key={art.number} className="col-md-4">
+          <div key={art.number} className="col-md-6">
             <div className="card mb-4 shadow-sm">
               <div className="card-body">
                 <p><strong>Номер заявки:</strong> {art.number}</p>
@@ -92,14 +93,14 @@ const Outart = () => {
                 <p>
                   <strong>3D модель:</strong>
                   <span title={art.dmodel}>
-                    {truncateText(art.dmodel, 30)}
+                    {truncateText(art.dmodel, 40)}
                   </span>
                   <button className="btn btn-link btn-sm" onClick={() => copyToClipboard(art.dmodel)}>Copy</button>
                 </p>
                 <p>
                   <strong>Скан служебной записки:</strong>
                   <span title={art.note}>
-                    {truncateText(art.note, 30)}
+                    {truncateText(art.note, 40)}
                   </span>
                   <button className="btn btn-link btn-sm" onClick={() => copyToClipboard(art.note)}>Copy</button>
                 </p>
