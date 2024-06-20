@@ -23,14 +23,13 @@ const copyToClipboard = (text) => {
 };
 
 const updateArtStatus = async (number, status) => {
-  const response = await fetch(`/outart/`, {
+  const response = await fetch(`/api/outart/`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ number, status })
   });
-  console.log(response.json());
   if (!response.ok) {
     throw new Error('Failed to update status');
   }
@@ -43,7 +42,7 @@ const Outart = () => {
   useEffect(() => {
     const getArts = async () => {
       let res = await axios.get(
-        "/outart/",
+        "/api/outart/",
         {
           headers: {
             Accept: 'application/json',
@@ -78,7 +77,7 @@ const Outart = () => {
     <div className="container mt-5">
       <h1 className="mb-4" style={{marginTop: "95px"}}>Список заявок</h1>
       <div className="row">
-        {arts.map((art) => (
+        {arts && arts.length && arts.map((art) => (
           <div key={art.number} className="col-md-6">
             <div className="card mb-4 shadow-sm">
               <div className="card-body">

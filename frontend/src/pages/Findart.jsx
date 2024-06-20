@@ -21,7 +21,7 @@ const Findart = () => {
     e.preventDefault();
     try {
       // Здесь вы можете отправить запрос на сервер и получить данные
-      const response = await fetch(`http://localhost:8000/findart?number=${formData.num}`);
+      const response = await fetch(`/api/findart?number=${formData.num}`);
       const data = await response.json();
       if (response.status !== 200) {
         setArt({});

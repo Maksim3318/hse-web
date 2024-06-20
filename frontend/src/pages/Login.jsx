@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const loginUrl = 'http://localhost:8000/accounts/login/';
+const loginUrl = '/api/accounts/login/';
 
 export default function Login({ onLogin }) {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export default function Login({ onLogin }) {
     // Sets the Cookie: csrftoken=... and returns masked csrftoken
     // in the response body
     const response = await fetch(
-      "http://localhost:8000/accounts/login/",
+      loginUrl,
       {
         credentials: "include"
       }
@@ -29,7 +29,7 @@ export default function Login({ onLogin }) {
     loginFormData.append("username", username);
     loginFormData.append("password", password);
 
-    axios.post('http://localhost:8000/accounts/login/', loginFormData, {
+    axios.post(loginUrl, loginFormData, {
       withCredentials: true,
     })
       .then(_ => {

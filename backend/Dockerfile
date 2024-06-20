@@ -35,20 +35,28 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 # Copy the source code into the container.
 COPY . .
 
-WORKDIR /app/forlab
+WORKDIR /app
+
+ARG DJANGO_SUPERUSER_USERNAME
+ARG DJANGO_SUPERUSER_EMAIL
+ARG DJANGO_SUPERUSER_PASSWORD
+
+RUN mkdir -p media
 
 RUN mkdir -p db-data \
     && python manage.py migrate \
-    && python manage.py collectstatic --no-input
+    && python manage.py createsuperuser --no-input
+
+RUN chown -R appuser:appuser /app
 
 # Switch to the non-privileged user to run the application.
 USER appuser
 
-# Create a mount point for static files
-VOLUME ["/var/www/hse-web/static"]
-
 # Create a mount point for the database file
-VOLUME ["/app/forlab/db-data"]
+VOLUME ["/app/db-data"]
+
+# Create a mount point for the media files
+VOLUME ["/app/media"]
 
 # Expose the port that the application listens on.
 EXPOSE 8000
