@@ -1,0 +1,24 @@
+{% load bootstrap3 %}
+{% block title %}{% endblock %}
+
+{% block content %}
+	<div class="features">
+		<h1>Форма по добавлению заявки</h1>
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.number }}<br>
+			{{ form.mail }}<br>
+			{{ form.name }}<br>
+			{{ form.op }}<br>
+			{{ form.course }}<br>
+			{{ form.project_name }}<br>
+			{{ form.teach_name }}<br>
+			{{ form.phone }}<br>
+			{{ form.dmodel }}<br>
+			{{ form.note }}<br>
+			{{ form.comment }}<br>
+			<span>{{ error }}</span>
+			<button class="btn btn-success" type="submit">Добавить</button>
+		</form>
+	</div>
+{% endblock %}

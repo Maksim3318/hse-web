@@ -1,0 +1,28 @@
+{% load bootstrap3 %}
+{% block title %}{% endblock %}
+
+{% block content %}
+	<div class="features">
+		<h1>Изменить статус заказа</h1>
+		<p>
+		{{ article.number }}<br>
+		{{ article.name }}<br>
+		</p>
+		<form method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.number.as_hidden }}
+			{{ form.mail.as_hidden }}
+			{{ form.name.as_hidden }}
+			{{ form.op.as_hidden }}
+			{{ form.course.as_hidden }}
+			{{ form.project_name.as_hidden }}
+			{{ form.teach_name.as_hidden }}
+			{{ form.phone.as_hidden }}
+			{{ form.dmodel.as_hidden }}
+			{{ form.note.as_hidden }}
+			{{ form.comment.as_hidden }}
+			{{ form.status }}<br>
+			<button class="btn btn-success" type="submit">Сохранить</button>
+		</form>
+	</div>
+{% endblock %}

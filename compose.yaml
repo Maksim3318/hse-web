@@ -1,20 +1,22 @@
 services:
-  nginx:
-    image: nginx:1.27
+  frontend:
+    build:
+      context: ./frontend/
     ports:
       - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/conf.d/default.conf
-      - static-files:/var/www/hse-web/static
   backend:
     build:
-      context: .
+      context: ./backend/
+      args:
+        DJANGO_SUPERUSER_USERNAME: ${DJANGO_SUPERUSER_USERNAME}
+        DJANGO_SUPERUSER_EMAIL: ${DJANGO_SUPERUSER_EMAIL}
+        DJANGO_SUPERUSER_PASSWORD: ${DJANGO_SUPERUSER_PASSWORD}
     ports:
-      - 8000:8000
+      - "8000:8000"
     volumes:
-      - static-files:/var/www/hse-web/static
-      - db-data:/app/forlab/db-data
+      - db-data:/app/db-data
+      - media-data:/app/media
 
 volumes:
-  static-files:
   db-data:
+  media-data:

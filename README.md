@@ -8,10 +8,18 @@ You'll need:
 
 ### Running
 
-1. Run
+1. Create `.env` file with django superuser credentials. Example:
+
+    ```
+    DJANGO_SUPERUSER_USERNAME=admin
+    DJANGO_SUPERUSER_EMAIL="admin@example.com"
+    DJANGO_SUPERUSER_PASSWORD=admin
+    ```
+
+2. Run
 
     ```sh
     docker compose up --build -d
     ```
 
-2. Go to `http://localhost`
+3. Go to `http://localhost`

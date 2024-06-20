@@ -1,0 +1,24 @@
+{% load bootstrap3 %}
+{% block title %}{% endblock %}
+
+{% block content %}
+	<div class="features">
+		<h1>Узнать статус</h1>
+		<form method="get">
+			<input name="num" type="text" placeholder="Поиск...">
+			<button class="btn btn-success" type="submit">Найти</button>
+		</form>
+		{% if art %}
+			{% for el in art %}
+				<div>
+					<h3>{{ el.number }}</h3>
+					<p>{{ el.status }}</p>
+				</div>
+			{% endfor %}
+		{% else %}
+			<div>
+				<h3>{{ error }}</h3>
+			</div>
+		{% endif %}
+	</div>
+{% endblock %}

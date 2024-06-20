@@ -1,0 +1,49 @@
+.container {
+  margin-top: 20px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-md-6 {
+  display: flex;
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.card-body {
+  flex: 1;
+}
+
+.card-body span[title] {
+  cursor: pointer;
+}
+
+.card-body button {
+  margin-left: 8px;
+  padding: 2px 8px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.card-body button:hover {
+  color: white;
+  text-decoration: none;
+  background-color: #0056b3;
+}
+
+.card-body button:focus {
+  color: white;
+  text-decoration: none;
+  background-color: green;
+}

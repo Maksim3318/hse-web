@@ -1,0 +1,11 @@
+db-data/
+media/
+static/
+templates/appform1.html
+templates/appform.html
+templates/edit.html
+templates/findart1.html
+templates/findart.html
+templates/index.html
+templates/manual.html
+templates/outart.html
